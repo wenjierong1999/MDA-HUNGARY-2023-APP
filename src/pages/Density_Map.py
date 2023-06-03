@@ -47,7 +47,7 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
                             color="laf10_per_hour",
                             size_max=30,
                             zoom=15, height=650,
-                            range_color=[40, 80],
+                            range_color=[30, 60],
                             center={"lat": 50.87467323, "lon": 4.699916431},
                             mapbox_style="open-street-map",
                             hover_data={"location": True, "latitude": False,
@@ -63,7 +63,7 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
                             color="laf10_per_hour",
                             size_max=30,
                             zoom=15, height=650,
-                            range_color=[40, 80],
+                            range_color=[30, 60],
                             center={"lat": 50.87467323, "lon": 4.699916431},
                             mapbox_style="open-street-map",
                             hover_data={"location": True, "latitude": False,
@@ -89,7 +89,7 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
                             )
 
     elif "btn-nclicks-3" == ctx.triggered_id:
-        msg = "You have selected noise map of laf 905%"
+        msg = "You have selected noise map of laf 95%"
         fig = px.scatter_mapbox(noise_map_date,
                             lat="latitude",
                             lon="longitude",

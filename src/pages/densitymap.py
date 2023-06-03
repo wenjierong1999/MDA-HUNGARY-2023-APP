@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc, callback
+from dash import html, dcc, callback, ctx
 import pandas as pd
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc

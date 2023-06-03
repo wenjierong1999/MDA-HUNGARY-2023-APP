@@ -9,7 +9,7 @@ import dash_bootstrap_components as dbc
 app = dash.Dash(__name__,
                 title='MDA Project',
                 use_pages=True,
-                external_stylesheets=[dbc.themes.BOOTSTRAP])
+                external_stylesheets=[dbc.themes.CERULEAN])
 server = app.server
 
 ########################################################################################################################

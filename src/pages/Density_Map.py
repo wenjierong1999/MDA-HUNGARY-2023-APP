@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc, callback, ctx
+from dash import html, dcc, callback,ctx
 import pandas as pd
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
@@ -7,7 +7,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import date
 
-dash.register_page(__name__)
+dash.register_page(__name__,
+                   path="/Density-Map",
+                   title="Density Map",
+                   name="Density Map")
 ########################################################################################################################
 #                                            DATA LOADING                                                 #
 ########################################################################################################################
@@ -17,8 +20,8 @@ noise_map = pd.read_csv("s3://mda-maindata/assets/Percentile_Noise_Weather_for_A
 #                                         DEFINING CALLBACK FUNCTIONS                                             #
 ########################################################################################################################
 @callback(
-    Output(component_id='output-date-picker', component_property='children'),
-    Output(component_id='container-button-timestamp', component_property='children'),
+    #Output(component_id='output-date-picker', component_property='children'),
+    #Output(component_id='container-button-timestamp', component_property='children'),
     Output(component_id="noise-density-map", component_property="figure"),
     Input(component_id="noise-date-picker", component_property="date"),
     Input(component_id="hour-slider",component_property="value"),
@@ -102,7 +105,7 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
                             color_continuous_scale="Blues"
                             )
         
-    return string_prefix+date_string, html.Div(msg), fig
+    return fig
 
 ########################################################################################################################
 #                                            LAYOUT FORMATTING                                                    #
@@ -111,12 +114,13 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
 layout = dbc.Container([
     dbc.Row([
         html.Div([
-            html.H2(children="Noise level in Leuven 2022, by hour")
+            html.H3(children="Noise level in Leuven 2022, by hour")
         ])
     ]),
     dbc.Row([
         dbc.Col([
             html.Div([
+                html.Div(['Select the date:']),
                 dcc.DatePickerSingle(
                     id="noise-date-picker",
                     calendar_orientation="horizontal",
@@ -127,19 +131,23 @@ layout = dbc.Container([
                     initial_visible_month=date(2022, 2, 17),
                     date=date(2022, 2, 17),
                     month_format="MMMM, YYYY"
-                ),html.Div(id="output-date-picker")])
+                )])
         ]),
         dbc.Col([
-                html.Button('laf10', id='btn-nclicks-1', n_clicks=0),
-                html.Button('laf90', id='btn-nclicks-2', n_clicks=0),
-                html.Button('laf95', id='btn-nclicks-3', n_clicks=0),
-                html.Div(id='container-button-timestamp')
+            html.Div(['Choose different noise level:']),
+            html.Div([
+                html.Button('laf10', id='btn-nclicks-1', n_clicks=0,className='btn btn-secondary'),
+                html.Button('laf90', id='btn-nclicks-2', n_clicks=0,className='btn btn-secondary'),
+                html.Button('laf95', id='btn-nclicks-3', n_clicks=0,className='btn btn-secondary')
+                #html.Div(id='container-button-timestamp')
+            ],className="btn-group")
         ])
 
     ]),
 
     dbc.Row([
         dbc.Col([
+                html.Div(['Select the hour:']),
                 html.Div([
                     dcc.Slider(
                         id="hour-slider",

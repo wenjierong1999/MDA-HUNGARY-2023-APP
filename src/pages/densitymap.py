@@ -159,8 +159,8 @@ layout = dbc.Container([
         html.Div([
             html.H3("Description"),
             html.Div([
-                html.P("On this page, we present the scatter plot of A-weighted sound level by hour, measured with a fast time-constant (LAF). A-weighting is the 'common' name for frequency-weighted sound levels, measured over the 'A' frequency range, and LAFn means A-weighted, sound level exceeded for n% of the measurement period, calculated by statistical analysis, where n is between 0.01% and 99.99%."),
-                html.P("The reason why we choose to present LAF10, LAF90, LAF95 is: the L10 has been found over the years to be a useful descriptor of road traffic noise as it correlates quite well with the disturbance people feel when close to busy roads as well as more rural situations, while LAF90 or LAF 95 have been widely adopted to quantify background noise levels.")
+                html.P("On this page, we present the scatter plot of A-weighted sound level by hour, measured with a fast time-constant (LAF). A-weighting is the 'common' name for frequency-weighted sound levels, measured over the 'A' frequency range, and LAFn means A-weighted, sound level exceeded for n% of the measurement period, calculated by statistical analysis, where n is between 0.01% and 99.99%.",style={'width': '20cm'}),
+                html.P("The reason why we choose to present LAF10, LAF90, LAF95 is: the L10 has been found over the years to be a useful descriptor of road traffic noise as it correlates quite well with the disturbance people feel when close to busy roads as well as more rural situations, while LAF90 or LAF 95 have been widely adopted to quantify background noise levels.",style={'width': '20cm'})
                 ])
             ])
     ]),
@@ -168,8 +168,8 @@ layout = dbc.Container([
         html.Div([
             html.H3("How to use:"),
             html.Div([
-                html.P("At the top, you can use the calendar to choose a specific date, and move the slider to select different hours, then the plot will show you the noise level at different locations. You can also click different buttons to output different noise levels (LAF10, LAF90, LAF95)."),
-                html.P("When you hover over a specific scatter point, there will be a hoverbox showing the noise decibel and location corresponding to the scatter point. ")
+                html.P("At the top, you can use the calendar to choose a specific date, and move the slider to select different hours, then the plot will show you the noise level at different locations. You can also click different buttons to output different noise levels (LAF10, LAF90, LAF95).",style={'width': '20cm'}),
+                html.P("When you hover over a specific scatter point, there will be a hoverbox showing the noise decibel and location corresponding to the scatter point. ",style={'width': '20cm'})
                 ])
             ])
     ]) 

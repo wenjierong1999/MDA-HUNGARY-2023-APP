@@ -6,7 +6,11 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import plotly.graph_objects as go
 
-dash.register_page(__name__)
+dash.register_page(__name__,
+                   path='/Noise-Level-and-Humidity',
+                   title='Noise level and Humidity',
+                   name='Noise level and Humidity'
+                   )
 ########################################################################################################################
 #                                            DATA LOADING                                                 #
 ########################################################################################################################
@@ -31,7 +35,6 @@ selectlist = ['Parkstraat_2', 'Naamsestraat_62', 'Calvariekapel']
 #                                         DEFINING CALLBACK FUNCTIONS                                             #
 ########################################################################################################################
 @callback(
-    Output(component_id='selectbox-linep-loc-result', component_property='children'),
     Output(component_id='linep-humdity-lcpeak-loc',component_property='figure'),
     Input(component_id='selectbox-linep-loc', component_property='value')
 )
@@ -47,7 +50,7 @@ def update_selectbox_linep_loc(loc):
         xaxis_title='Datetime',
         yaxis_title='Values'
     )
-    return f'You have selected {loc}', fig
+    return fig
 
 
 ########################################################################################################################
@@ -58,19 +61,24 @@ def update_selectbox_linep_loc(loc):
 layout = dbc.Container(
     [
         dbc.Row([
-            dbc.Col(html.H2('This is the page for visualization on xx'))
+            dbc.Col(html.H3('The relationship of noise peak values and humidity'))
         ]),
         dbc.Row([
             dbc.Col([
+                html.Div('Select the location to display:'),
                 html.Div(
-                    dcc.Dropdown(selectlist, selectlist[0], id='selectbox-linep-loc')
-                ),
+                    dcc.Dropdown(selectlist, selectlist[0], id='selectbox-linep-loc',style={'width': '8cm'})
+                )
             ]),
+        ]),
+        html.Br(),
+        dbc.Row([
             dbc.Col([
-                html.Div(
-                    id='selectbox-linep-loc-result'
-                ),
-            ])
+                html.Div([
+                    html.P('On this page, we present the relationship between C-weighted noise peak values and humidity in 2022. C-weighting is used for high-level measurements and peak sound pressure levels. Unlike the A-weighted curve, which is widely used for general-purpose noise measurements, the C-weighting better correlates with the human response to high noise levels, including noise-induced hearing loss and other health issues.'),
+                    html.P('At the top, you can use the menu bar to select the location you want to inspect.')
+                ],style={'width': '20cm'})
+            ]),
         ]),
         dbc.Row([
             dbc.Col([
@@ -78,6 +86,13 @@ layout = dbc.Container(
                     dcc.Graph(id="linep-humdity-lcpeak-loc")
                 )
 
+            ])
+        ]),
+        dbc.Row([
+            dbc.Col([
+                html.Div([
+                    html.P('Sound records from locations Calvariekapel, Naamsestraat 62, and Parkstraat 2 are relatively complete. For other locations, the sound values were imputed using the MICE algorithm (Multivariate Imputation by Chained Equations). However, the imputed parts do not exhibit the same cyclic patterns as shown in Calvariekapel, Naamsestraat 62, and Parkstraat 2. Imputed values are closer to the mean noise level in each monitoring site.')
+                ],style={'width': '20cm'})
             ])
         ])
     ]

@@ -50,8 +50,10 @@ sidebar = html.Div(
 
 app.layout = dbc.Container(
     [dbc.Row([
-        dbc.Col(html.H1("MDA Project App Demo",
-                        style={'textAlign': 'center'}))
+        dbc.Col([html.H1("Modern Data Analytics [G0Z39a]",
+                        style={'textAlign': 'center'}),
+                 html.H2("APP Demo 2022-2023",style={'textAlign': 'center'})
+                 ])
     ]),
         html.Hr(),
 

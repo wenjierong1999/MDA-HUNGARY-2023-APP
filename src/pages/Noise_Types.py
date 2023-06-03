@@ -7,7 +7,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import date
 
-dash.register_page(__name__)
+dash.register_page(__name__,
+                   path="/Noise-Types",
+                   title="Noise Types",
+                   name="Noise Types")
 ########################################################################################################################
 #                                            DATA LOADING                                                 #
 ########################################################################################################################
@@ -381,15 +384,21 @@ def update_bar_chart_month(btn7,btn8,btn9):
 layout = dbc.Container([
     dbc.Row([
         html.Div([
-            html.H2(children="Noise event in Leuven 2022")
+            html.H3(children="The types of noise broken down by month, weekday, and hour")
         ])
     ]),
     dbc.Row([
+        html.Div([
+            html.P(children="On this page, we display the noise types that exceed 70 decibels in an interactive manner. By clicking on the seven colorful squares in the legend, you can select the types of noise to be shown. This allows you to get a glimpse of the noise sources that occurred over time in Leuven in 2002.")
+        ],style={"width":"20cm"})
+    ]),
+    dbc.Row([
         dbc.Col([
-                html.Button('Entire', id='btn-nclicks-1', n_clicks=0),
-                html.Button('Humidity > 80%', id='btn-nclicks-2', n_clicks=0),
-                html.Button('Humidity < 80%', id='btn-nclicks-3', n_clicks=0),
-                html.Div(id='container-button1')
+            html.Div([
+                html.Button('Entire', id='btn-nclicks-1', n_clicks=0,className='btn btn-secondary',style={"aria-label":"Basic example"}),
+                html.Button('Humidity > 80%', id='btn-nclicks-2', n_clicks=0,className='btn btn-secondary'),
+                html.Button('Humidity < 80%', id='btn-nclicks-3', n_clicks=0,className='btn btn-secondary')
+            ],className="btn-group",style={"aria-label":"Basic example"})
         ])
 
     ]),
@@ -399,10 +408,12 @@ layout = dbc.Container([
     ]),
    dbc.Row([
         dbc.Col([
-                html.Button('Entire', id='btn-nclicks-4', n_clicks=0),
-                html.Button('Humidity > 80%', id='btn-nclicks-5', n_clicks=0),
-                html.Button('Humidity < 80%', id='btn-nclicks-6', n_clicks=0),
-                html.Div(id='container-button2')
+            html.Div([
+                html.Button('Entire', id='btn-nclicks-4', n_clicks=0, className='btn btn-secondary',
+                            style={"aria-label": "Basic example"}),
+                html.Button('Humidity > 80%', id='btn-nclicks-5', n_clicks=0, className='btn btn-secondary'),
+                html.Button('Humidity < 80%', id='btn-nclicks-6', n_clicks=0, className='btn btn-secondary')
+            ], className="btn-group", style={"aria-label": "Basic example"})
         ])
 
     ]),
@@ -412,10 +423,12 @@ layout = dbc.Container([
     ]),
     dbc.Row([
         dbc.Col([
-                html.Button('Entire', id='btn-nclicks-7', n_clicks=0),
-                html.Button('Humidity > 80%', id='btn-nclicks-8', n_clicks=0),
-                html.Button('Humidity < 80%', id='btn-nclicks-9', n_clicks=0),
-                html.Div(id='container-button3')
+            html.Div([
+                html.Button('Entire', id='btn-nclicks-7', n_clicks=0, className='btn btn-secondary',
+                            style={"aria-label": "Basic example"}),
+                html.Button('Humidity > 80%', id='btn-nclicks-8', n_clicks=0, className='btn btn-secondary'),
+                html.Button('Humidity < 80%', id='btn-nclicks-9', n_clicks=0, className='btn btn-secondary')
+            ], className="btn-group", style={"aria-label": "Basic example"})
         ])
 
     ]),

@@ -19,7 +19,7 @@ df_noiseTypes = pd.read_csv('s3://mda-maindata/assets/Export_41_and_weather.csv'
 
 # <1-1> Create the dataframe to plot line chart. Selecting only 3 sites with relative full noise records
 # Condition 1: Keep specific columns
-columns_to_keep_lineGraph = ['description_x', 'timestamp', 'mean_lamax', 'mean_lcpeak', 'LC_HUMIDITY', 'data_number']
+columns_to_keep_lineGraph = ['location', 'timestamp', 'mean_lamax', 'mean_lcpeak', 'LC_HUMIDITY', 'data_number']
 # Condition 2: Select specific noise monitoring site
 
 loc_match_dict = {

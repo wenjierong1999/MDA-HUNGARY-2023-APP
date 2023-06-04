@@ -122,7 +122,7 @@ layout = dbc.Container([
             html.H4("How to use:"),
             html.Div([
                 html.P("At the top, you can use the calendar to choose a specific date, and move the slider to select different hours, then the plot will show you the noise level at different locations. You can also select different metric from the dropdown list to output different noise levels (LAF10, LAF90, LAF95)."),
-                html.P("When you hover over a specific scatter point, there will be a hoverbox showing the noise decibel and location corresponding to the scatter point. "),style={'width': '20cm'}
+                html.P("When you hover over a specific scatter point, there will be a hoverbox showing the noise decibel and location corresponding to the scatter point. ",style={'width': '20cm'}),
                 ])
             ])
     ]) 

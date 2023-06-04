@@ -80,6 +80,7 @@ layout = dbc.Container([
                     initial_visible_month=date(2022, 2, 17),
                     date=date(2022, 2, 17),
                     month_format="MMMM, YYYY"
+
                 )])
         ]),
         dbc.Col([
@@ -102,7 +103,7 @@ layout = dbc.Container([
                         step=None,
                         value=0,
                         marks={str(hour): str(hour) + ":00" for hour in range(0, 24)},
-                        updatemode="drag"
+                        updatemode="mouseup"
                     )
             ])
         ])

@@ -29,7 +29,7 @@ Next, user can access the web application in localhost server by running the scr
     ├── assets                # Folder that stores figures used in App
     ├── src                   # Source files for app
     ├── modeling              # py scripts and notebooks used in modeling stage
-    ├── pre-processing        # py scripts and notebooks used in pre-processing
+    ├── pre-processing        # py scripts and notebooks used in pre-processing stage
     ├── README.md             # readme file
     ├── render.yaml           # file for APP deployment
-    └── requirements.txt
+    └── requirements.txt      # list of dependencies

@@ -14,8 +14,8 @@ dash.register_page(__name__,
                    name=pagename)
 
 
-dbc.Container([
-    dbc.Row([
+layout= dbc.Container([
+  dbc.Row([
         html.Div([
             html.H2(children="Using Random Forest to Predict Noise Type"),
             html.P("This page provides information about the initial model we applied and the importance of its features, along with a brief project conclusion."),

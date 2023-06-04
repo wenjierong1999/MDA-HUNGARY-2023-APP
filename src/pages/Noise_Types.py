@@ -6,6 +6,7 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import date
+import calendar
 
 dash.register_page(__name__,
                    path="/Noise-Types",

@@ -20,7 +20,7 @@ df_noiseTypes = pd.read_csv("s3://mda-maindata/assets/Export_41_and_weather.csv"
 
 ## <2-1> Create the dataframe to plot bar chart.
 # Keep specific columns
-columns_to_keep_bar = ['month', 'day', 'hour', 'weekday', 'noise_event_laeq_primary_detected_class', 'Humidity>80']
+columns_to_keep_bar = ['description', 'month', 'day', 'hour', 'weekday', 'noise_event_laeq_primary_detected_class', 'Humidity>80']
 
 # Make a new dataframe for the function to run. Select full hour
 df_noiseTypes_bar = df_noiseTypes[columns_to_keep_bar].copy()
@@ -61,6 +61,11 @@ df_humidity_lt_80_week = df_humidity_lt_80.groupby(['weekday', 'weekday_name', '
 df_humidity_gt_80_hour = df_humidity_gt_80.groupby(['hour', 'noise_event_laeq_primary_detected_class']).size().reset_index(name='count_gt_80_hour')
 # Group the data by month and noise type for Humidity>80 = 0
 df_humidity_lt_80_hour = df_humidity_lt_80.groupby(['hour', 'noise_event_laeq_primary_detected_class']).size().reset_index(name='count_lt_80_hour')# Create a dictionary to assign colors to each primary type
+
+ # Create specific Dataframes for <2-2-7> Noise Types by locations
+# address =['Calvariekapel_KUL','Naamsestraat_35_Maxim','Naamsestraat_57_Xior','Naamsestraat_62_Taste',
+#         'Naamsestraat_76_His-Hears','Naamsestraat_81','Parkstraat_2_La-Filosovia','Vrijthof']
+grouped_noise_location = df_noiseTypes_bar.groupby(['description', 'noise_event_laeq_primary_detected_class']).size().reset_index(name='count')
 
 # Create a dictionary to assign colors to each primary type
 color_mapping = {
@@ -288,7 +293,7 @@ def update_bar_chart_week(btn4,btn5,btn6):
     Input(component_id='btn-nclicks-8', component_property='n_clicks'),
     Input(component_id='btn-nclicks-9', component_property='n_clicks')
 )
-def update_bar_chart_month(btn7,btn8,btn9):
+def update_bar_chart_hour(btn7,btn8,btn9):
 
     # noise event by hour
     # Create a bar chart with different color segments for each primary type
@@ -380,6 +385,33 @@ def update_bar_chart_month(btn7,btn8,btn9):
     
     return fig_hour
 
+@callback(
+    Output(component_id="noise-event-by-location", component_property="figure"),
+    Input(component_id="btn-nclicks-10", component_property="n_clicks"))
+def update_bar_chart_loc(btn10):
+    fig_location = go.Figure()
+
+    for noise_type, color in color_mapping.items():
+        data_subset = grouped_noise_location[grouped_noise_location['noise_event_laeq_primary_detected_class'] == noise_type]
+        fig_location.add_trace(go.Bar(
+            x=data_subset['description'],
+            y=data_subset['count'],
+            name=noise_type,
+            marker_color=color
+        ))
+
+    # Update the layout of the chart
+    fig_location.update_layout(
+        title='Noise Type Count by Location, Leuven (2022)',
+        xaxis_title='Noise Monitoring Sites',
+        yaxis_title='Types Count',
+        barmode='stack'  # Set the bar mode to stack for different color segments
+    )
+
+    return fig_location
+
+
+
 ########################################################################################################################
 #                                            LAYOUT FORMATTING                                                    #
 ########################################################################################################################
@@ -387,12 +419,14 @@ def update_bar_chart_month(btn7,btn8,btn9):
 layout = dbc.Container([
     dbc.Row([
         html.Div([
-            html.H3(children="The types of noise broken down by month, weekday, and hour")
+            html.H2(children="The types of noise broken down by time and location")
         ])
     ]),
     dbc.Row([
         html.Div([
-            html.P(children="On this page, we display the noise types that exceed 70 decibels in an interactive manner. By clicking on the seven colorful squares in the legend, you can select the types of noise to be shown. This allows you to get a glimpse of the noise sources that occurred over time in Leuven in 2002.")
+            html.P(children="On this page, we display the noise types that exceed 70 decibels in an interactive manner. By clicking on the seven colorful squares in the legend, you can select the types of noise to be shown. This allows you to get a glimpse of the noise sources that occurred over time in Leuven in 2022. "
+            ),
+            html.P("In addition, you can gain more insights into the noise profile by clicking the buttons to change the condition of humidity. ")
         ],style={"width":"20cm"})
     ]),
     dbc.Row([
@@ -435,8 +469,19 @@ layout = dbc.Container([
         ])
 
     ]),
-
     dbc.Row([
         dcc.Graph(id="noise-event-by-hour")
+    ]),
+    dbc.Row([
+        dbc.Col([
+            html.Div([
+                html.Button('Entire', id='btn-nclicks-10', n_clicks=0, className='btn btn-secondary',
+                            style={"aria-label": "Basic example"})
+                ])
+            ])
+        ]),
+    
+    dbc.Row([
+        dcc.Graph(id="noise-event-by-location")
     ])
 ])

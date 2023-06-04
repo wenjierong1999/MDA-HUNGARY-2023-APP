@@ -23,3 +23,13 @@ Next, user can access the web application in localhost server by running the scr
 
 
 ### Repository Structure
+
+    .
+    ├── .idea                  
+    ├── assets                # Folder that stores figures used in App
+    ├── src                   # Source files for app
+    ├── modeling              # py scripts and notebooks used in modeling stage
+    ├── pre-processing        # py scripts and notebooks used in pre-processing
+    ├── README.md             # readme file
+    ├── render.yaml           # file for APP deployment
+    └── requirements.txt

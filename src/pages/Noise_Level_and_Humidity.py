@@ -9,7 +9,8 @@ import plotly.graph_objects as go
 dash.register_page(__name__,
                    path='/Noise-Level-and-Humidity',
                    title='Noise level and Humidity',
-                   name='Noise level and Humidity'
+                   name='Noise level and Humidity',
+                   order=2
                    )
 ########################################################################################################################
 #                                            DATA LOADING                                                 #

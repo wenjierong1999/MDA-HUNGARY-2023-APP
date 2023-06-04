@@ -11,7 +11,8 @@ pagename='Modeling'
 dash.register_page(__name__,
                    path=f'/{pagename}',
                    title=pagename,
-                   name=pagename)
+                   name=pagename,
+                   order=4)
 
 
 layout= dbc.Container([

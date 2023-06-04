@@ -8,9 +8,9 @@ import plotly.graph_objects as go
 from datetime import date
 
 dash.register_page(__name__,
-                   path="/Density-Map",
-                   title="Density Map",
-                   name="Density Map")
+                   path="/Noise-Map",
+                   title="Noise Map",
+                   name="Noise Map")
 ########################################################################################################################
 #                                            DATA LOADING                                                 #
 ########################################################################################################################

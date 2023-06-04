@@ -14,8 +14,9 @@ dash.register_page(__name__,
 ########################################################################################################################
 #                                            DATA LOADING                                                 #
 ########################################################################################################################
+# pd.set_option('display.max_columns', None)
 noise_map = pd.read_csv("s3://mda-maindata/assets/Percentile_Noise_Weather_for_APP_Un-scaled_NAdropped.csv")
-
+# print(noise_map.describe())
 selectlist_noise_level = [
     {'label':'laf10','value':'laf10_per_hour'},
     {'label':'laf90','value':'laf90_per_hour'},
@@ -45,12 +46,12 @@ def update_density_map(date_value,metric,hour):
                             color=metric,
                             size_max=30,
                             zoom=15, height=650,
-                            range_color=[30, 60],
+                            range_color=[28.5, 108.6],
                             center={"lat": 50.87467323, "lon": 4.699916431},
                             mapbox_style="open-street-map",
                             hover_name="location",
                             hover_data={"latitude":False,"longitude":False},
-                            color_continuous_scale="Blues"
+                            color_continuous_scale="YlGnBu"
                             )
     return fig
 

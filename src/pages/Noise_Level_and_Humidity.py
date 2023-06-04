@@ -25,10 +25,17 @@ columns_to_keep_lineGraph = ['location', 'timestamp', 'mean_lamax', 'mean_lcpeak
 loc_match_dict = {
     'Parkstraat_2': 'data0_02',
     'Naamsestraat_62': 'data0_06',
-    'Calvariekapel': 'data0_03'
+    'Calvariekapel': 'data0_03',
+    'Naamsestraat_35': 'data0_08',
+    'Naamsestraat_57': 'data0_07',
+    'Naamsestraat_76': 'data0_05',
+    'Naamsestraat_81': 'data0_01',
+    'Vrijthof' : 'data0_04'
 }
 
-selectlist = ['Parkstraat_2', 'Naamsestraat_62', 'Calvariekapel']
+selectlist = ['Parkstraat_2', 'Naamsestraat_62', 'Calvariekapel',
+              'Naamsestraat_35','Naamsestraat_57','Naamsestraat_76',
+              'Naamsestraat_81','Vrijthof']
 
 
 ########################################################################################################################
@@ -61,7 +68,7 @@ def update_selectbox_linep_loc(loc):
 layout = dbc.Container(
     [
         dbc.Row([
-            dbc.Col(html.H3('The relationship of noise peak values and humidity'))
+            dbc.Col(html.H2('The relationship of noise peak values and humidity'))
         ]),
         dbc.Row([
             dbc.Col([
@@ -75,8 +82,9 @@ layout = dbc.Container(
         dbc.Row([
             dbc.Col([
                 html.Div([
+                    html.H4('Description'),
                     html.P('On this page, we present the relationship between C-weighted noise peak values and humidity in 2022. C-weighting is used for high-level measurements and peak sound pressure levels. Unlike the A-weighted curve, which is widely used for general-purpose noise measurements, the C-weighting better correlates with the human response to high noise levels, including noise-induced hearing loss and other health issues.'),
-                    html.P('At the top, you can use the menu bar to select the location you want to inspect.')
+                    html.P('Sound records from locations Calvariekapel, Naamsestraat 62, and Parkstraat 2 are relatively complete. For other locations, the sound values were imputed using the MICE algorithm (Multivariate Imputation by Chained Equations). However, the imputed parts do not exhibit the same cyclic patterns as shown in Calvariekapel, Naamsestraat 62, and Parkstraat 2. Imputed values are closer to the mean noise level in each monitoring site.')
                 ],style={'width': '20cm'})
             ]),
         ]),
@@ -91,7 +99,9 @@ layout = dbc.Container(
         dbc.Row([
             dbc.Col([
                 html.Div([
-                    html.P('Sound records from locations Calvariekapel, Naamsestraat 62, and Parkstraat 2 are relatively complete. For other locations, the sound values were imputed using the MICE algorithm (Multivariate Imputation by Chained Equations). However, the imputed parts do not exhibit the same cyclic patterns as shown in Calvariekapel, Naamsestraat 62, and Parkstraat 2. Imputed values are closer to the mean noise level in each monitoring site.')
+                    html.H4('How to use:'),
+                    html.P('At the top, you can use the menu bar to select the location you want to inspect. If you want to zoom in, you can select a range on the plot with your mouse. If you want to zoom out, double-click the plot and you will go back to the original plot.'),
+                    html.P('When you hover over a specific point on the polyline, there will be a hoverbox showing you the date and the noise value or humidity value corresponding to the point.')
                 ],style={'width': '20cm'})
             ])
         ])

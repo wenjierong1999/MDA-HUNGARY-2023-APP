@@ -36,10 +36,12 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
     noise_map_date = noise_map[(noise_map["month"] == month)
                                & (noise_map["day"] == day)
                                & (noise_map["hour"] == hour)]
-    string_prefix = 'You have selected: '
-    date_string = date_object.strftime('%b %d, %A')
+    #string_prefix = 'You have selected: '
+    #date_string = date_object.strftime('%b %d, %A')
     
-    msg = "You have selected noise map of laf 10%"
+    #msg = "You have selected noise map of laf 10%"
+
+    #Figure for default setting
     fig = px.scatter_mapbox(noise_map_date,
                             lat="latitude",
                             lon="longitude",
@@ -51,9 +53,11 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
                             center={"lat": 50.87467323, "lon": 4.699916431},
                             mapbox_style="open-street-map",
                             hover_data={"location": True, "latitude": False,
-                                        "longitude": False, "laf005_per_hour": True},
+                                        "longitude": False, "laf10_per_hour": True},
                             color_continuous_scale="Blues"
                             )
+
+    #Figure for laf 10%
     if "btn-nclicks-1" == ctx.triggered_id:
         msg = "You have selected noise map of laf 10%"
         fig = px.scatter_mapbox(noise_map_date,
@@ -67,10 +71,11 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
                             center={"lat": 50.87467323, "lon": 4.699916431},
                             mapbox_style="open-street-map",
                             hover_data={"location": True, "latitude": False,
-                                        "longitude": False, "laf005_per_hour": True},
+                                        "longitude": False, "laf10_per_hour": True},
                             color_continuous_scale="Blues"
                             )
 
+    #Figure for laf 90%
     elif "btn-nclicks-2" == ctx.triggered_id:
         msg = "You have selected noise map of laf 90%"
         fig = px.scatter_mapbox(noise_map_date,
@@ -84,10 +89,11 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
                             center={"lat": 50.87467323, "lon": 4.699916431},
                             mapbox_style="open-street-map",
                             hover_data={"location": True, "latitude": False,
-                                        "longitude": False, "laf005_per_hour": True},
+                                        "longitude": False, "laf90_per_hour": True},
                             color_continuous_scale="Blues"
                             )
 
+    #Figure for laf 95%
     elif "btn-nclicks-3" == ctx.triggered_id:
         msg = "You have selected noise map of laf 95%"
         fig = px.scatter_mapbox(noise_map_date,
@@ -101,7 +107,7 @@ def update_density_map(date_value,hour,btn1,btn2,btn3):
                             center={"lat": 50.87467323, "lon": 4.699916431},
                             mapbox_style="open-street-map",
                             hover_data={"location": True, "latitude": False,
-                                        "longitude": False, "laf005_per_hour": True},
+                                        "longitude": False, "laf95_per_hour": True},
                             color_continuous_scale="Blues"
                             )
         
@@ -165,7 +171,7 @@ layout = dbc.Container([
     ]),
     dbc.Row([
         html.Div([
-            html.H3("Description"),
+            html.H4("Description"),
             html.Div([
                 html.P("On this page, we present the scatter plot of A-weighted sound level by hour, measured with a fast time-constant (LAF). A-weighting is the 'common' name for frequency-weighted sound levels, measured over the 'A' frequency range, and LAFn means A-weighted, sound level exceeded for n% of the measurement period, calculated by statistical analysis, where n is between 0.01% and 99.99%.",style={'width': '20cm'}),
                 html.P("The reason why we choose to present LAF10, LAF90, LAF95 is: the L10 has been found over the years to be a useful descriptor of road traffic noise as it correlates quite well with the disturbance people feel when close to busy roads as well as more rural situations, while LAF90 or LAF 95 have been widely adopted to quantify background noise levels.",style={'width': '20cm'})
@@ -174,7 +180,7 @@ layout = dbc.Container([
     ]),
     dbc.Row([
         html.Div([
-            html.H3("How to use:"),
+            html.H4("How to use:"),
             html.Div([
                 html.P("At the top, you can use the calendar to choose a specific date, and move the slider to select different hours, then the plot will show you the noise level at different locations. You can also click different buttons to output different noise levels (LAF10, LAF90, LAF95).",style={'width': '20cm'}),
                 html.P("When you hover over a specific scatter point, there will be a hoverbox showing the noise decibel and location corresponding to the scatter point. ",style={'width': '20cm'})

@@ -6,7 +6,7 @@ from datetime import date
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 
-pagename='Modelling'
+pagename='Modeling'
 
 dash.register_page(__name__,
                    path=f'/{pagename}',
@@ -17,7 +17,7 @@ dash.register_page(__name__,
 layout = dbc.Container([
     dbc.Row([
         html.Div([
-            html.H3(children="Random Forest Modelling")
+            html.H3(children="Random Forest Modeling")
         ])
     ])
 ])

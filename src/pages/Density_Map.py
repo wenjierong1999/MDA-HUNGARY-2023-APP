@@ -16,101 +16,42 @@ dash.register_page(__name__,
 ########################################################################################################################
 noise_map = pd.read_csv("s3://mda-maindata/assets/Percentile_Noise_Weather_for_APP_Un-scaled_NAdropped.csv")
 
+selectlist_noise_level = [
+    {'label':'laf10','value':'laf10_per_hour'},
+    {'label':'laf90','value':'laf90_per_hour'},
+    {'label':'laf95','value':'laf95_per_hour'}
+]
+
 ########################################################################################################################
 #                                         DEFINING CALLBACK FUNCTIONS                                             #
 ########################################################################################################################
 @callback(
-    #Output(component_id='output-date-picker', component_property='children'),
-    #Output(component_id='container-button-timestamp', component_property='children'),
     Output(component_id="noise-density-map", component_property="figure"),
     Input(component_id="noise-date-picker", component_property="date"),
-    Input(component_id="hour-slider",component_property="value"),
-    Input(component_id='btn-nclicks-1', component_property='n_clicks'),
-    Input(component_id='btn-nclicks-2', component_property='n_clicks'),
-    Input(component_id='btn-nclicks-3', component_property='n_clicks')
+    Input(component_id="noise-metric-dropdown", component_property="value"),
+    Input(component_id="hour-slider",component_property="value")
 )
-def update_density_map(date_value,hour,btn1,btn2,btn3):
+def update_density_map(date_value,metric,hour):
     date_object = date.fromisoformat(date_value)
     month = date_object.month
     day = date_object.day
     noise_map_date = noise_map[(noise_map["month"] == month)
                                & (noise_map["day"] == day)
                                & (noise_map["hour"] == hour)]
-    #string_prefix = 'You have selected: '
-    #date_string = date_object.strftime('%b %d, %A')
-    
-    #msg = "You have selected noise map of laf 10%"
-
-    #Figure for default setting
     fig = px.scatter_mapbox(noise_map_date,
                             lat="latitude",
                             lon="longitude",
-                            size="laf10_per_hour",
-                            color="laf10_per_hour",
+                            size=metric,
+                            color=metric,
                             size_max=30,
                             zoom=15, height=650,
                             range_color=[30, 60],
                             center={"lat": 50.87467323, "lon": 4.699916431},
                             mapbox_style="open-street-map",
-                            hover_data={"location": True, "latitude": False,
-                                        "longitude": False, "laf10_per_hour": True},
+                            hover_name="location",
+                            hover_data={"latitude":False,"longitude":False},
                             color_continuous_scale="Blues"
                             )
-
-    #Figure for laf 10%
-    if "btn-nclicks-1" == ctx.triggered_id:
-        msg = "You have selected noise map of laf 10%"
-        fig = px.scatter_mapbox(noise_map_date,
-                            lat="latitude",
-                            lon="longitude",
-                            size="laf10_per_hour",
-                            color="laf10_per_hour",
-                            size_max=30,
-                            zoom=15, height=650,
-                            range_color=[30, 60],
-                            center={"lat": 50.87467323, "lon": 4.699916431},
-                            mapbox_style="open-street-map",
-                            hover_data={"location": True, "latitude": False,
-                                        "longitude": False, "laf10_per_hour": True},
-                            color_continuous_scale="Blues"
-                            )
-
-    #Figure for laf 90%
-    elif "btn-nclicks-2" == ctx.triggered_id:
-        msg = "You have selected noise map of laf 90%"
-        fig = px.scatter_mapbox(noise_map_date,
-                            lat="latitude",
-                            lon="longitude",
-                            size="laf90_per_hour",
-                            color="laf90_per_hour",
-                            size_max=30,
-                            zoom=15, height=650,
-                            range_color=[30, 60],
-                            center={"lat": 50.87467323, "lon": 4.699916431},
-                            mapbox_style="open-street-map",
-                            hover_data={"location": True, "latitude": False,
-                                        "longitude": False, "laf90_per_hour": True},
-                            color_continuous_scale="Blues"
-                            )
-
-    #Figure for laf 95%
-    elif "btn-nclicks-3" == ctx.triggered_id:
-        msg = "You have selected noise map of laf 95%"
-        fig = px.scatter_mapbox(noise_map_date,
-                            lat="latitude",
-                            lon="longitude",
-                            size="laf95_per_hour",
-                            color="laf95_per_hour",
-                            size_max=30,
-                            zoom=15, height=650,
-                            range_color=[30, 60],
-                            center={"lat": 50.87467323, "lon": 4.699916431},
-                            mapbox_style="open-street-map",
-                            hover_data={"location": True, "latitude": False,
-                                        "longitude": False, "laf95_per_hour": True},
-                            color_continuous_scale="Blues"
-                            )
-        
     return fig
 
 ########################################################################################################################
@@ -140,13 +81,11 @@ layout = dbc.Container([
                 )])
         ]),
         dbc.Col([
-            html.Div(['Choose different noise level:']),
-            html.Div([
-                html.Button('laf10', id='btn-nclicks-1', n_clicks=0,className='btn btn-secondary'),
-                html.Button('laf90', id='btn-nclicks-2', n_clicks=0,className='btn btn-secondary'),
-                html.Button('laf95', id='btn-nclicks-3', n_clicks=0,className='btn btn-secondary')
-                #html.Div(id='container-button-timestamp')
-            ],className="btn-group")
+            html.Div(['Choose metric for noise level:']),
+            dcc.Dropdown(selectlist_noise_level,selectlist_noise_level[0]['value'],
+                         clearable=False,
+                         style={'width': '6cm'},
+                         id='noise-metric-dropdown')
         ])
 
     ]),

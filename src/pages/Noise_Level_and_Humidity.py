@@ -67,7 +67,7 @@ layout = dbc.Container(
             dbc.Col([
                 html.Div('Select the location to display:'),
                 html.Div(
-                    dcc.Dropdown(selectlist, selectlist[0], id='selectbox-linep-loc',style={'width': '8cm'})
+                    dcc.Dropdown(selectlist, selectlist[0], id='selectbox-linep-loc',style={'width': '8cm'},clearable=False)
                 )
             ]),
         ]),

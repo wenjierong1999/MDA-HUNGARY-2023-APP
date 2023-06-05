@@ -12,7 +12,7 @@ dash.register_page(__name__,
 layout = dbc.Container([
     dbc.Row([
         html.Div([
-            html.H2(children="Welcome!")
+            html.H3(children="Welcome!")
         ])
     ]),
     dbc.Row([
@@ -20,7 +20,7 @@ layout = dbc.Container([
             html.P(children="In this APP, you can explore the noise and metro data collected in Leuven, Belgium, 2022.",className="mb-0"),
             html.P(children="Please click on the left column (content), to play with data visualization.",className="mb-0"),
             html.Br(),
-            html.H2(children="General Information"),
+            html.H3(children="General Information"),
             html.Div("Click on the each section below for detailed description"),
             html.Div([
                 dbc.Accordion([
@@ -54,7 +54,7 @@ layout = dbc.Container([
     html.Br(),
     dbc.Row([
         html.Div([
-            html.H2(children="Team Member:"),
+            html.H3(children="Team Member:"),
             html.Div('Fan Yu (r0862624)'),
             html.Div('Jierong Wen (r0912240)'),
             html.Div('Lie Hong (s0203439)'),

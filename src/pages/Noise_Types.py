@@ -420,7 +420,7 @@ def update_bar_chart_loc(btn10):
 layout = dbc.Container([
     dbc.Row([
         html.Div([
-            html.H2(children="The types of noise broken down by time and location")
+            html.H3(children="The types of noise broken down by time and location")
         ])
     ]),
     dbc.Row([

@@ -69,7 +69,7 @@ def update_selectbox_linep_loc(loc):
 layout = dbc.Container(
     [
         dbc.Row([
-            dbc.Col(html.H2('The relationship of noise peak values and humidity'))
+            dbc.Col(html.H3('The relationship of noise peak values and humidity'))
         ]),
         dbc.Row([
             dbc.Col([

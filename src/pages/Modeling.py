@@ -18,7 +18,7 @@ dash.register_page(__name__,
 layout= dbc.Container([
   dbc.Row([
         html.Div([
-            html.H2(children="Using Random Forest to Predict Noise Type"),
+            html.H3(children="Using Random Forest to Predict Noise Type"),
             html.P("This page provides information about the initial model we applied and the importance of its features, along with a brief project conclusion."),
             html.P("We aim to explain the intriguing findings we discovered through modeling, hoping to provide you with interesting insights into how temporal, spatial, and meteorological factors contribute to predicting noise types.")
         ], style={"width":"20cm"})

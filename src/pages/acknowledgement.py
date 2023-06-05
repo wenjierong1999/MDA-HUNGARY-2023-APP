@@ -24,7 +24,7 @@ layout = dbc.Container([
             html.Br(),
             html.P(children="We are immensely grateful to Gregory van Kruijsdijk for his illuminating sessions on big data analysis and modelling. His teachings have equipped us with a strong foundation to collectively manipulate and harness the power of data."),
             html.Br(),
-            html.P(children="Our appreciation also goes to Ruben Kerkhofs, who skillfully introduced us to web application development and visualization. His insightful approach encapsulated the essential components covered in this course, leaving us with a holistic understanding of the subject matter.")
+            html.P(children="Our appreciation also goes to Ruben Kerkhofs, who skillfully introduced us to web application development and visualisation. His insightful approach encapsulated the essential components covered in this course, leaving us with a holistic understanding of the subject matter.")
         ],style={"width":"20cm"})
     ])
 ])
